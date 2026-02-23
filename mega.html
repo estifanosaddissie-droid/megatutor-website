@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MEGA TUTOR Registration Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 30px; }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header img { 
+  width: 300px;   /* bigger logo */
+  height: auto;   /* keeps correct proportion */
+}
+    .header h1 { color: #1f3c88; margin: 10px 0 0 0; font-size: 36px; }
+    .alert { max-width:600px; margin:auto; background:#ffebcc; padding:15px; border:2px solid #ff9900; border-radius:10px; text-align:center; font-weight:bold; color:#663300; margin-bottom:20px;}
+    form { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { margin-top: 20px; background: #1f3c88; color: white; padding: 15px; border: none; width: 100%; border-radius: 5px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #138808; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="MEGA.png" alt="MEGA TUTOR Logo">
+    <h1>MEGA TUTOR Registration</h1>
+  </div>
+
+ <div class="alert">
+  ⚠️ <strong>Attention: MEGA TUTOR Registration</strong><br><br>
+  Please provide honest and accurate information. Any false, misleading, or incomplete data will result in immediate rejection, permanent disqualification, and possible legal consequences.<br><br>
+
+  All submitted information and documents are collected strictly for verification, safety, and quality assurance to protect students, parents, tutors, and our national vision.<br><br>
+
+  By joining MEGA TUTOR, you agree to uphold our ethical standards, maintain integrity, and contribute to building a secure, trusted, and knowledge-driven future for Ethiopia.
+</div>
+
+
+  <form id="tutorForm" enctype="multipart/form-data">
+    <label>Full Name</label>
+    <input type="text" name="fullName" required>
+
+    <label>Age</label>
+    <input type="number" name="age" required>
+
+    <label>Gender</label>
+    <select name="gender" required>
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Phone Number</label>
+    <input type="text" name="phone" required>
+
+    <label>City / Region</label>
+    <input type="text" name="city" required>
+
+    <label>Highest Education Level</label>
+    <input type="text" name="education" required>
+
+    <label>Subjects You Can Tutor</label>
+    <textarea name="subjects" rows="3" required></textarea>
+
+    <label>Strength Subjects</label>
+    <textarea name="strengths" rows="2" required></textarea>
+
+    <label>Weakness Subjects</label>
+    <textarea name="weaknesses" rows="2"></textarea>
+
+    <label>Preferred Teaching Method</label>
+    <select name="teachingMethod" required>
+      <option value="">Select</option>
+      <option value="Home">Home Tutoring</option>
+      <option value="Online">Online / Zoom</option>
+      <option value="Classroom">Classroom / Group</option>
+      <option value="Hybrid">Hybrid</option>
+    </select>
+
+    <label>Availability (Days / Times)</label>
+    <textarea name="availability" rows="3" required></textarea>
+
+    <label>Years of Experience</label>
+    <input type="number" name="experience">
+
+    <label>Experience Level (1–5)</label>
+    <select name="level" required>
+      <option value="">Select</option>
+      <option value="1">1 – Beginner</option>
+      <option value="2">2 – Novice</option>
+      <option value="3">3 – Intermediate</option>
+      <option value="4">4 – Advanced</option>
+      <option value="5">5 – Expert</option>
+    </select>
+
+    <label>Certifications (Optional)</label>
+    <input type="text" name="certifications">
+
+    <label>LinkedIn / Portfolio (Optional)</label>
+    <input type="url" name="portfolio">
+
+    <label>Special Skills / Notes</label>
+    <textarea name="notes" rows="3"></textarea>
+
+    <label>National ID - Front Photo</label>
+    <input type="file" name="nidFront" accept="image/*" required>
+
+    <label>National ID - Back Photo</label>
+    <input type="file" name="nidBack" accept="image/*" required>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'; // replace with your Apps Script URL
+    const form = document.getElementById('tutorForm');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // Validate ID uploads
+      if(!form.nidFront.files[0] || !form.nidBack.files[0]){
+        alert('⚠️ Please upload both front and back National ID photos.');
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => alert('✅ Thank you! Your data and ID photos have been submitted to MEGA TUTOR.'))
+      .catch(error => alert('❌ Submission failed. Please try again.'));
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
